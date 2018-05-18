@@ -5,21 +5,12 @@ MAINTAINER Arem Semenishch <art90com@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive 
 
 RUN     apt-get -y update
-RUN     apt-get -y install software-properties-common
-RUN apt-get upgrade -y
-
-RUN apt-get clean all
-RUN     apt-get -y update --fix-missing
 
 RUN apt-get install -y wget git zip unzip curl apache2 php7.0 php7.0-curl libapache2-mod-php7.0 php7.0-cli php-cli-prompt php-composer-semver php-composer-spdx-licenses php7.0-xml php7.0-common php7.0-mbstring php7.0-gd php7.0-intl php7.0-json php7.0-mysql php7.0-mcrypt php7.0-zip composer supervisor
 
 RUN apt-get install -y mysql-server mysql-client mysql-common
 
-RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
-RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-
 RUN cd /var/www/ && git clone https://github.com/artroot/koala.git 
-RUN cd /var/www/koala && composer self-update
 RUN cd /var/www/koala && composer install
 
 RUN mkdir /var/www/koala/runtime/cache
